@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Target, Zap, Rocket, Wrench, FolderOpen, Check, ChevronRight, FileText, Bot, CreditCard, Globe, Smartphone, Link } from 'lucide-react';
+import { Target, Zap, Rocket, Wrench, FolderOpen, Check, ChevronRight, FileText, Bot, CreditCard, Globe, Smartphone, Link, Flame } from 'lucide-react';
 
 type ItemKey = 'strategy' | 'rapid' | 'launch' | 'solutions' | 'atlas' | null;
 
@@ -17,7 +17,6 @@ const mainItems = [
   {
     key: 'strategy' as ItemKey,
     icon: Target,
-    emoji: '🎯',
     title: 'Strategy & Discovery',
     tag: 'Service',
     description: 'Identify highest-impact AI opportunities',
@@ -26,7 +25,6 @@ const mainItems = [
   {
     key: 'rapid' as ItemKey,
     icon: Zap,
-    emoji: '⚡',
     title: 'Rapid Implementation',
     tag: 'Service',
     description: '48-72 hour deployment guarantee',
@@ -35,7 +33,6 @@ const mainItems = [
   {
     key: 'launch' as ItemKey,
     icon: Rocket,
-    emoji: '🚀',
     title: 'Launch & Scale',
     tag: 'Service',
     description: 'Production-ready with monitoring',
@@ -44,7 +41,6 @@ const mainItems = [
   {
     key: 'solutions' as ItemKey,
     icon: Wrench,
-    emoji: '🛠️',
     title: 'Solutions',
     tag: 'Explore',
     description: 'View all capabilities →',
@@ -53,7 +49,6 @@ const mainItems = [
   {
     key: 'atlas' as ItemKey,
     icon: FolderOpen,
-    emoji: '🗂️',
     title: 'Atlas',
     tag: 'Portfolio',
     description: 'View all projects →',
@@ -62,7 +57,11 @@ const mainItems = [
   },
 ];
 
-export function WhatWeOfferSection() {
+interface WhatWeOfferSectionProps {
+  onAtlasClick?: () => void;
+}
+
+export function WhatWeOfferSection({ onAtlasClick }: WhatWeOfferSectionProps) {
   const [selectedItem, setSelectedItem] = useState<ItemKey>(null);
   const [expandedSolutions, setExpandedSolutions] = useState(false);
 
@@ -70,9 +69,9 @@ export function WhatWeOfferSection() {
     if (item.key === 'solutions') {
       setExpandedSolutions(!expandedSolutions);
       setSelectedItem(item.key);
-    } else if (item.link) {
-      // Navigate to portfolio
-      window.location.href = item.link;
+    } else if (item.key === 'atlas' && onAtlasClick) {
+      // Open Atlas modal
+      onAtlasClick();
     } else {
       setSelectedItem(selectedItem === item.key ? null : item.key);
     }
@@ -90,7 +89,7 @@ export function WhatWeOfferSection() {
             className="text-center mb-12"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 mb-6">
-              <span>🔥</span>
+              <Flame className="w-4 h-4 text-orange-500" />
               <span className="text-sm font-medium text-gray-300">How We Help</span>
             </div>
 
@@ -141,7 +140,7 @@ export function WhatWeOfferSection() {
                         }`}
                       >
                         <div className="flex items-center gap-3">
-                          <span className="text-xl">{item.emoji}</span>
+                          <item.icon className={`w-5 h-5 transition-colors ${isSelected ? 'text-[#10A37F]' : 'text-gray-500'}`} />
                           <span className={`font-medium transition-colors ${isSelected ? 'text-white' : 'text-gray-300'}`}>
                             {item.title}
                           </span>

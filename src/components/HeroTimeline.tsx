@@ -235,13 +235,15 @@ export function HeroTimeline() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 mb-6">
-            <Zap className="w-4 h-4 text-white" />
-            <span className="text-sm font-medium text-gray-400 uppercase tracking-wider">The Age of Execution</span>
-          </div>
+          <h2 className="text-3xl md:text-4xl font-medium text-white mb-3 tracking-tight">
+            See the Process
+          </h2>
+          <p className="text-gray-500 mb-8">
+            Select a service to see the timeline
+          </p>
 
           {/* Service Type Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             {serviceTypes.map((service) => {
               const Icon = service.icon;
               const isSelected = selectedService.id === service.id;
@@ -257,27 +259,13 @@ export function HeroTimeline() {
                 >
                   <Icon className={`w-4 h-4 ${isSelected ? 'text-black' : 'text-gray-500 group-hover:text-white'}`} />
                   <span className="text-sm font-medium">{service.label}</span>
+                  <span className={`text-xs ${isSelected ? 'text-gray-600' : 'text-gray-600'}`}>
+                    {service.duration}
+                  </span>
                 </button>
               );
             })}
           </div>
-
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-4 tracking-tight">
-            From Kickoff to Production:{' '}
-            <motion.span
-              key={selectedService.id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-white"
-            >
-              {selectedService.duration}
-            </motion.span>
-          </h2>
-
-          <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-            Other agencies bill by the hour. We bill by the outcome.
-            <span className="text-gray-600 text-sm ml-2">* Scope dependent</span>
-          </p>
         </motion.div>
 
         {/* Card Deck */}

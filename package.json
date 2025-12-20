@@ -1,5 +1,5 @@
 {
-  "name": "combined-app",
+  "name": "777",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.4.2",
     "@vercel/analytics": "^1.6.1",
     "autoprefixer": "^10.4.23",
     "class-variance-authority": "^0.7.1",
@@ -21,7 +23,8 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "tailwind-merge": "^3.4.0",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "three": "^0.182.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
